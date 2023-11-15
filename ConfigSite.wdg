@@ -1,0 +1,231 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : ConfigSite
+ major_version : 28
+ minor_version : 0
+ type : 7
+ description : ""
+ subtype : 0
+procedure_set :
+ identifier : 0x1480370005d30bd4
+ internal_properties : CAAAAAgAAABGLu41kG7fjQV3iS4F72qmnKaNh5694reolNKIW0iw
+ code_elements :
+  type_code : 31
+  p_codes :
+   -
+     code : |1-
+      
+      GLOBAL
+      	// Gestion d'un utilisateur courant
+      	gsNomUtilisateurEnCours est une chaîne
+      	
+      constant
+      	csAdmin_Login_Administrateur	= "LOGIN_ADMIN"					// Login administrateur
+      	csAdmin_MDP_Administrateur		= "MDP_ADMIN"					// MDP Administrateur
+      	csAdmin_Login_Defaut			= "admin"						// Login par défaut
+      fin
+     type : 720896
+  procedures :
+   -
+     name : RécupèreParamètreSite
+     procedure_id : 1477241185374579151
+     type_code : 15
+     code : |1+
+      // Résumé : Récupération d'un paramètre de configuration du site
+      // Syntaxe :
+      //[ <Résultat> = ] RécupèreParamètreSite (<sNomParamètre> [, <sValeurParDéfaut>])
+      //
+      // Paramètres :
+      //	sNomParamètre : Nom du paramètre (voir les constantes..)
+      //	sValeurParDéfaut (valeur par défaut="") : Valeur par défaut à renvoyer
+      // Valeur de retour :
+      // 	Type indéterminé : Valeur du paramètre
+      //
+      
+      PROCEDURE RécupèreParamètreSite(sNomParamètre,sValeurParDéfaut = "")
+      
+      // Recherche du paramètre
+      HLitRecherchePremier(CONFIGURATION_SITE,Nom_Paramètre,sNomParamètre)
+      SI HTrouve(CONFIGURATION_SITE) ALORS
+      	
+      	// Selon le type de paramètre	
+      	SELON CONFIGURATION_SITE.TypeParamètre
+      		// Entier
+      		CAS CN_ENTIER
+      			// Renvoie la valeur entière de ce paramètre
+      			RENVOYER CONFIGURATION_SITE.ValeurEntier
+      			
+      		// Binaire
+      		CAS CN_BINAIRE
+      			// Renvoie la valeur binaire de ce paramètre
+      			RENVOYER CONFIGURATION_SITE.ValeurBinaire
+      			
+      		// Chaîne
+      		CAS CN_CHAINE
+      			// Renvoie la valeur chaîne de ce paramètre
+      			RENVOYER CONFIGURATION_SITE.ValeurChaîne
+      			
+      		// Réel
+      		CAS CN_REEL		
+      			// Renvoie la valeur réelle de ce paramètre
+      			RENVOYER CONFIGURATION_SITE.ValeurRéelle
+      			
+      		// Cas inconnu
+      		AUTRE CAS
+      			// On indique que la valeur par défaut est utilisée en dehors du bandeau et du logo
+      			dbgAssertion(Faux,"Type de paramètre de configuration non connu")
+      			
+      			
+      	FIN
+      Sinon
+      	dbgAssertion(Faux,"Paramètre non trouvé en base : la valeur par défaut va être utilisée")	
+      	
+      FIN
+      
+      
+      // Par défaut, si rien n'est trouvé ou que le type de valeur n'est pas correct, on renvoie une chaîne vide
+      // Si la valeur attendue est une valeur chaîne ou binaire, aucun pb
+      // Si la valeur attendue est une valeur entière ou réelle, elle sera à 0
+      RENVOYER sValeurParDéfaut
+     type : 458752
+   -
+     name : SauvegardeParamètreSite
+     internal_properties : CAAAAAgAAADII9SyL0x4mTami63qmvu++/D8vHofof6pxITVFSzOOsDPIdRZHqRNzPTmkLYSZdpwQDxlrkLZ8+wYyV6E0MQZAzxaisR2g7pqEs7yvHVezU6jiQVN1qOwTCEMDgPMVnczgpEjxBnlnpCLBgUMAMnolePvgkj7B6Dl0hFtymHPRo5A4moHpq0I/Gkr8TRU9Y2r8gX4K6A=
+     procedure_id : 1477241185374644703
+     type_code : 15
+     code : |1-
+      // Résumé : Sauvegarde d'un paramètre de configuration du site
+      // Syntaxe :
+      //[ <Résultat> = ] SauvegardeParamètreSite (<sNomParamètre>, <sValeur>, <nType>)
+      //
+      // Paramètres :
+      //	sNomParamètre : Nom du paramètre
+      //	sValeur : Valeur à affecter à ce paramètre
+      //	nType : Type du paramètre
+      // Valeur de retour :
+      // 	booléen : VRAI si le paramètre a été sauvegardé, FAUX dans le cas contraire
+      //
+      // Traitement automatique des exceptions :   exécuter le bloc de code CAS EXCEPTION:
+      //
+      
+      PROCEDURE SauvegardeParamètreSite(sNomParamètre, sValeur, nType)
+      
+      
+      nValeurEntière est un entier
+      moValeurRéelle est un monétaire
+      
+      
+      // Est-ce que l'on doit caster la valeur ?
+      SELON nType
+      
+      	CAS CN_BINAIRE, CN_CHAINE
+      		// On ne fait rien
+      		
+      	CAS CN_REEL
+      		// On caste la valeur dans un monétaire
+      		moValeurRéelle = sValeur
+      		
+      	CAS CN_ENTIER
+      		
+      		// On caste la valeur dans un entier
+      		nValeurEntière = sValeur
+      		
+      	AUTRE CAS
+      		// Le type est inconnu, on renvoie faux		
+      		AjouteErreur("Type de paramètre inconnu")
+      		RENVOYER Faux
+      FIN
+      
+      
+      // Recherche du paramètre dans le fichier de configuration
+      HLitRecherchePremier(CONFIGURATION_SITE,Nom_Paramètre,sNomParamètre)
+      
+      // Mise à jour des paramètres
+      HRAZ()
+      CONFIGURATION_SITE.Nom_Paramètre = sNomParamètre
+      CONFIGURATION_SITE.TypeParamètre = nType
+      
+      SELON nType
+      	CAS CN_BINAIRE
+      		// On attache le mémo
+      		HAttacheMémo(CONFIGURATION_SITE,ValeurBinaire,sValeur)
+      	
+      	CAS CN_CHAINE
+      	
+      		CONFIGURATION_SITE.ValeurChaîne = sValeur
+      	
+      	CAS CN_REEL
+      	
+      		CONFIGURATION_SITE.ValeurRéelle = moValeurRéelle
+      		
+      	CAS CN_ENTIER
+      		
+      		CONFIGURATION_SITE.ValeurEntier = nValeurEntière
+      		
+      	AUTRE CAS
+      		
+      FIN
+      
+      
+      // Est-ce que l'on doit le modifier ou l'ajouter ?
+      SI HTrouve(CONFIGURATION_SITE) ALORS
+      	// Paramètre trouvé : il faut le modifier
+      	SI HModifie(CONFIGURATION_SITE) = Faux alors
+      		AjouteErreur("Impossible de modifier le paramètre")
+      		RENVOYER Faux
+      	SINON
+      		RENVOYER Vrai
+      	FIN
+      
+      SINON
+      	// Paramètre non trouvé : il faut l'ajouter
+      	SI HAjoute(CONFIGURATION_SITE) = Faux alors
+      		AjouteErreur("Impossible d'ajouter le paramètre")
+      		RENVOYER Faux		
+      	SINON
+      		RENVOYER Vrai
+      	FIN
+      
+      FIN
+      
+      CAS EXCEPTION:
+      	dbgAssertion(Faux,"Exception non gérée pendant l'enregistrement du paramètre")
+      	AjouteErreur("Exception détectée",ExceptionInfo())
+      	renvoyer Faux
+     type : 458752
+   -
+     name : bEstConnectéEnAdmin
+     procedure_id : 1477298338426271485
+     type_code : 15
+     code : |1-
+      // Résumé : Est-ce que l'on est identifié en tant qu'administrateur ?
+      // Syntaxe :
+      //[ <Résultat> = ] bEstConnectéEnAdmin ()
+      //
+      // Paramètres :
+      //	Aucun
+      // Valeur de retour :
+      // 	booléen : Vrai si administrateur connecté, Faux sinon
+      //
+      
+      PROCEDURE restreint bEstConnectéEnAdmin()
+      
+      // Vérification des droits
+      SI gsNomUtilisateurEnCours <> "" ALORS
+      	RENVOYER Vrai
+      SINON
+      	RENVOYER Faux
+      FIN
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : COL_SansNom1
+resources :
+ string_res :
+  identifier : 0x10f6dba505bd2fce
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : CAAAAAgAAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ

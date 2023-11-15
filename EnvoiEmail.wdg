@@ -1,0 +1,316 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : EnvoiEmail
+ major_version : 28
+ minor_version : 0
+ type : 7
+ description : ""
+ subtype : 0
+procedure_set :
+ identifier : 0x14748daf0edaa2aa
+ internal_properties : CAAAAAgAAABGLu41kG7fjQV3iS4F72qmnKaNh5694reolNKIW0iw
+ code_elements :
+  type_code : 31
+  p_codes :
+   -
+     code : |1-
+      
+      ST_CONFIGURATION_SMTP est une Structure
+      	sAdresseServeur		est une chaîne
+      	sLoginUtilisateur	est une chaîne
+      	sMDPUtilisateur		est une chaîne
+      	nPort				est un entier
+      	bModeSécurisé		est un booléen	
+      FIN
+      
+      gstConfig_SMTP est un ST_CONFIGURATION_SMTP
+      
+      constant
+      
+      	// Type des paramètres du site
+      	CN_ENTIER = 1
+      	CN_CHAINE = 2
+      	CN_REEL = 4
+      	CN_BINAIRE = 5
+      		
+      	// Constantes de l'historique
+      	CN_HISTORIQUE_TYPE_WEB			= 0
+      	
+      	// Configuration email
+      	csAdmin_Contact_EmailExpéditeur		= "CONTACT_EMAIL_EXPEDITEUR"		// Adresse email d'envoi pour le formulaire de contact
+      	csAdmin_Contact_EmailDestinataire	= "CONTACT_EMAIL_DESTINATAIRE"	// Adresse email destinataire pour le formulaire de contact
+      	csAdmin_CONFIGSMTP					= "CONFIG_SMTP"					// Configuration du serveur SMTP pour l'envoi des emails
+      fin
+     type : 720896
+  procedures :
+   -
+     name : LireConfigurationSMTP
+     internal_properties : CAAAAAgAAAAeQeZWqR4YD9gNuw5ISpse4q5d4YfQh8vxSSLWonylqfGpzXAstIQfjtu5yNZJ9N/c91UXiZv53fcJCNn0zKQH2jXtD1BPimLproJX87E+1RbRiyhFUUvyPW0p6P5mipLcRRthNLb+/G4cHMU2fOcWaLmnLrlIMic+6HTcyeP/rQgO
+     procedure_id : 1473958795424809765
+     type_code : 15
+     code : |1+
+      
+      
+      // Résumé : Renvoie la configuration du serveur SMTP 
+      // Syntaxe :
+      //[ <Résultat> = ] LireConfigurationSMTP ()
+      //
+      // Paramètres :
+      //	Aucun
+      // Valeur de retour :
+      // 	ST_CONFIGURATION_SMTP : Configuration SMTP 	
+      //// Traitement automatique des exceptions :   exécuter le bloc de code CAS EXCEPTION:
+      //
+      
+      PROCEDURE LireConfigurationSMTP()
+      
+      // Variables locales
+      stConfiguration 			est un ST_CONFIGURATION_SMTP
+      sConfigurationSerialisée	est une chaîne
+      
+      // Configuration par défaut
+      stConfiguration.nPort = 25
+      stConfiguration.sAdresseServeur = "localhost"
+      
+      // Initialisation du mécanisme de remontée des erreurs
+      InitialiseErreur()
+      
+      // Récupération du contenu stocké
+      sConfigurationSerialisée = RécupèreParamètreSite(csAdmin_CONFIGSMTP, "")
+      
+      // Dé-sérialisation
+      SI sConfigurationSerialisée <> "" ALORS
+      	QUAND EXCEPTION DANS
+      		Désérialise(stConfiguration,sConfigurationSerialisée,psdXML)
+      	FAIRE
+      		AjouteErreur("Un problème de format a été détecté",ErreurInfo())
+      	FIN
+      SINON
+      	
+      FIN
+      
+      // On renvoie la configuration
+      RENVOYER stConfiguration
+      
+      CAS EXCEPTION:
+      AjouteErreur("Exception détectée",ExceptionInfo(errComplet))
+      RENVOYER stConfiguration
+      
+      
+      
+     type : 458752
+   -
+     name : EnvoieMessageContact
+     internal_properties : CAAAAAgAAAAeQeZWqR4YD9gNuw5ISpse4q5d4YfQh8vxSSLWonylqfGpzXAstIQfjtu5yNZJ9N/c91UXiZv53fcJCNn0zKQH2jXtD1BPimLproJX87E+1RbRiyhFUUvyPW0p6P5mipLcRRthNLb+/G4cHMU2fOcWaLmnLrlIMic+6HTcyeP/rQgO
+     procedure_id : 1473958868439270801
+     type_code : 15
+     code : |1+
+      // Résumé : Envoie un message de pré-inscription
+      // Syntaxe :
+      //[ <Résultat> = ] EnvoieMessageContact (<sEmailClient> est chaîne, <sMessageHTML> est chaîne)
+      //
+      // Paramètres :
+      //	sEmailClient (chaîne ANSI) : Email du client
+      //	sMessageHTML (chaîne ANSI) : Texte du message
+      // Valeur de retour :
+      // 	booléen : VRAI si le message a bien été envoyé, FAUX dans le cas contraire
+      //
+      //// Traitement automatique des exceptions :   exécuter le bloc de code CAS EXCEPTION:
+      //
+      
+      PROCEDURE EnvoieMessageContact(sEmailClient est une chaîne, sMessageHTML est une chaîne)
+      
+      // Variables locales
+      sDestinataire		est une chaîne
+      sExpéditeur			est une chaîne
+      
+      // Lecture de la configuration
+      gstConfig_SMTP 		= LireConfigurationSMTP()
+      sDestinataire		= LireAdresseEmailDestinataireFormulaire()
+      sExpéditeur			= sEmailClient
+      
+      // Réinitialisation des variables 
+      EmailRAZ()
+      
+      // Ouverture de la session SMTP
+      SI OuvreSessionSMTP(gstConfig_SMTP) = Faux ALORS RENVOYER Faux
+      
+      // On remplit la structure
+      Email.NbDestinataire 	= 1
+      Email.Expéditeur 		= sExpéditeur
+      Email.Destinataire[1]	= sDestinataire
+      Email.Sujet 			= "Formulaire de pré-inscription depuis le site Internet"
+      Email.HTML				= sMessageHTML
+      
+      // Envoi du message
+      SI EmailEnvoieMessage(gstConfig_SMTP.sLoginUtilisateur) = Faux ALORS 
+      	AjouteErreur("Le message n'a pas été envoyé",ErreurInfo())
+      	RENVOYER Faux
+      FIN
+      
+      // Fermeture de la session POP3
+      EmailFermeSession(gstConfig_SMTP.sLoginUtilisateur)	
+      
+      // Par défaut, l'envoi se déroule correctement
+      RENVOYER Vrai
+      
+      CAS EXCEPTION:
+      AjouteErreur("Exception détectée",ExceptionInfo())
+      
+      // Fermeture de la session SMTP
+      EmailFermeSession(gstConfig_SMTP.sLoginUtilisateur)	
+      
+      // Message non envoyé
+      RENVOYER Faux
+     type : 458752
+   -
+     name : OuvreSessionSMTP
+     internal_properties : CAAAAAgAAAAeQeZWqR4YD9gNuw5ISpse4q5d4YfQh8vxSSLWonylqfGpzXAstIQfjtu5yNZJ9N/c91UXiZv53fcJCNn0zKQH2jXtD1BPimLproJX87E+1RbRiyhFUUvyPW0p6P5mipLcRRthNLb+/G4cHMU2fOcWaLmnLrlIMic+6HTcyeP/rQgO
+     procedure_id : 1473962334230893988
+     type_code : 15
+     code : |1+
+      // Résumé : Ouvre une session SMTP
+      // Syntaxe :
+      //[ <Résultat> = ] OuvreSessionSMTP (<stConfiguration> est ST_CONFIGURATION_SMTP)
+      //
+      // Paramètres :
+      //	stConfiguration (ST_CONFIGURATION_SMTP) : <indiquez ici le rôle de stConfiguration>
+      // Valeur de retour :
+      // 	booléen : Vrai si la session a été ouverte, Faux sinon
+      //
+      //// Traitement automatique des exceptions :   exécuter le bloc de code CAS EXCEPTION:
+      //
+      
+      PROCEDURE OuvreSessionSMTP(stConfiguration est un ST_CONFIGURATION_SMTP)
+      
+      // Configuration du délai maximum
+      EmailChangeTimeOut(10)
+      
+      // Ouverture de la session SMTP
+      SI stConfiguration.bModeSécurisé = Vrai ALORS
+      	SI EmailOuvreSessionSMTP(stConfiguration.sLoginUtilisateur,stConfiguration.sMDPUtilisateur,stConfiguration.sAdresseServeur,stConfiguration.nPort,emailOptionSécuriséTLS) = Faux ALORS
+      		AjouteErreur("Impossible d'ouvrir la session SMTP",ErreurInfo(),Faux)
+      		RENVOYER Faux
+      	FIN
+      SINON
+      	SI EmailOuvreSessionSMTP(stConfiguration.sLoginUtilisateur,stConfiguration.sMDPUtilisateur,stConfiguration.sAdresseServeur,stConfiguration.nPort,emailOptionDéfaut) = Faux ALORS
+      		AjouteErreur("Impossible d'ouvrir la session SMTP",ErreurInfo(),Faux)	
+      		RENVOYER Faux
+      	FIN	
+      FIN
+      
+      // Par défaut, la connexion est établie
+      RENVOYER Vrai
+      
+      CAS EXCEPTION:
+      AjouteErreur("Exception détectée",ExceptionInfo())
+      RENVOYER Faux
+      
+     type : 458752
+   -
+     name : LireAdresseEmailDestinataireFormulaire
+     procedure_id : 1473962480259881518
+     type_code : 15
+     code : |1-
+      // Résumé : Renvoie l'adresse email destinataire pour les contacts
+      // Syntaxe :
+      //[ <Résultat> = ] LireAdresseEmailDestinataireFormulaire ()
+      //
+      // Paramètres :
+      //	Aucun
+      // Valeur de retour :
+      // 	Type indéterminé : Adresse email
+      //
+      
+      PROCEDURE LireAdresseEmailDestinataireFormulaire()
+      
+      // Initialisation du mécanisme de remontée des erreurs
+      InitialiseErreur()
+      
+      RENVOYER  RécupèreParamètreSite(csAdmin_Contact_EmailDestinataire,"")
+     type : 458752
+   -
+     name : ModifierAdresseEmailDestinataireContactSociété
+     procedure_id : 1473988829885068801
+     type_code : 15
+     code : |1-
+      // Résumé : Modifie l'adresse email utilisée lors d'une prise de contact (envoi d'une copie)
+      // Syntaxe :
+      //[ <Résultat> = ] ModifierAdresseEmailDestinataireContactSociété (<sAdresseEmail> est chaîne)
+      //
+      // Paramètres :
+      //	sAdresseEmail (chaîne ANSI) : Nouvelle adresse email
+      // Valeur de retour :
+      // 	booléen : Vrai si la modification a été effectuée, Faux sinon
+      //
+      
+      PROCEDURE ModifierAdresseEmailDestinataireContactSociété(sAdresseEmail est une chaine)
+      
+      // Initialisation du mécanisme de remontée des erreurs
+      InitialiseErreur()
+      
+      RENVOYER SauvegardeParamètreSite(csAdmin_Contact_EmailDestinataire,sAdresseEmail,CN_CHAINE)
+     type : 458752
+   -
+     name : ModifierConfigurationSMTP
+     internal_properties : CAAAAAgAAAAeQeZWqR4YD9gNuw5ISpse4q5d4YfQh8vxSSLWonylqfGpzXAstIQfjtu5yNZJ9N/c91UXiZv53fcJCNn0zKQH2jXtD1BPimLproJX87E+1RbRiyhFUUvyPW0p6P5mipLcRRthNLb+/G4cHMU2fOcWaLmnLrlIMic+6HTcyeP/rQgO
+     procedure_id : 1473989057518388374
+     type_code : 15
+     code : |1-
+      // Résumé : Modifie la configuration du serveur SMTP 
+      // Syntaxe :
+      //[ <Résultat> = ] ModifierConfigurationSMTP (<stNouvelleConfiguration> est ST_CONFIGURATION_SMTP)
+      //
+      // Paramètres :
+      //	stNouvelleConfiguration (ST_CONFIGURATION_SMTP) : Nouvelle configuration du serveur SMTP
+      // Valeur de retour :
+      // 	booléen : Vrai si la modification a été effectuée, Faux sinon
+      //
+      //// Traitement automatique des exceptions :   exécuter le bloc de code CAS EXCEPTION:
+      //
+      
+      PROCEDURE ModifierConfigurationSMTP(stNouvelleConfiguration est un ST_CONFIGURATION_SMTP)
+      
+      // Variables locales
+      sConfigurationSerialisée	est une chaine
+      
+      // Initialisation du mécanisme de remontée des erreurs
+      InitialiseErreur()
+      
+      // Sérialisation
+      QUAND EXCEPTION DANS
+      	sérialise(stNouvelleConfiguration,sConfigurationSerialisée,psdXML)
+      FAIRE
+      	AjouteErreur("Un problème de format a été détecté",ErreurInfo())
+      	RENVOYER Faux
+      FIN
+      
+      // Sauvegarde en base
+      SI SauvegardeParamètreSite(csAdmin_CONFIGSMTP, sConfigurationSerialisée, CN_CHAINE) = Faux alors	
+      	RENVOYER Faux
+      FIN
+      
+      // La modification a été effectuée
+      RENVOYER Vrai
+      
+      CAS EXCEPTION:
+      	AjouteErreur("Exception détectée",ExceptionInfo(errComplet))
+      	RENVOYER Faux
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : COL_SansNom1
+resources :
+ string_res :
+  identifier : 0x14748da90ed88d18
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+  strings :
+   -
+     text :
+      fr-FR : Utilisateur non identifié ou ne disposant pas de droits suffisants
+     index : 0
+custom_note :
+ internal_properties : CAAAAAgAAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ

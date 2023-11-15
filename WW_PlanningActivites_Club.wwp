@@ -1,0 +1,333 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : WW_PlanningActivites_Club
+ major_version : 28
+ minor_version : 0
+ type : 4097
+ description : ""
+ subtype : 0
+project :
+ identifier : 0x0
+ internal_properties : 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
+ configurations :
+  -
+    name : Site
+    internal_properties : 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
+    configuration_id : 4950957893234621469
+    type : 2
+    generation_name : WW_PlanningActivites_Club.wdl
+    version :
+     version : 1.00Ah
+    index_page_generation_name : Accueil
+    language : 1
+    64bits : true
+ elements :
+  identifier : 0x44356b8f0002d208
+  elements :
+   -
+     name : Accueil
+     identifier : 0x443682730016d869
+     internal_properties : CAAAAAgAAAAJyvI96syugZ8DzjkZ4aXY13BUlWSNBDBJqlFJ2FpCsTnLn9Nc15zlePMEFafw6AO7s3Ftlzj37uNxhwqyvaBbA41Ht0k=
+     physical_name : .\Accueil.wwh
+     type : 65538
+     report :
+      fr-FR : FR
+   -
+     name : PAGEMOD_Centre
+     identifier : 0x44364bd600148076
+     internal_properties : CAAAAAgAAABaMAIGpeLK1ZJ0Q3ZrKq/bIqMpMYQm/6CjxOY1t0nDBccPZ5mKvvhzu2VfWdkX49U/xw==
+     physical_name : .\PAGEMOD_Centre.wwt
+     type : 65541
+   -
+     name : Contact
+     identifier : 0x443693bb00205a65
+     internal_properties : CAAAAAgAAAAuOW24d0sVGmB8WbaCHnIV5L8f0BnMSfUn1u1v+kmiGe8Z8ZuWOTJmufTB1m4xKcL4cLaoam0im1z6EIEpNiniiArEyiQ=
+     physical_name : .\Contact.wwh
+     type : 65538
+     report :
+      fr-FR : FR
+   -
+     name : Formulaire
+     identifier : 0x443693a9001e1386
+     internal_properties : CAAAAAgAAAD8awbDI1vGOs/ZSETQn1THMIJnjtI+qUrdvMH74yot+IpfGrz5thG5Fgc8JpRRw4tmc7xNv8Ytzt9e2hBojKu0cwDvhA==
+     physical_name : .\FOrmulaire.wwh
+     type : 65538
+     report :
+      fr-FR : FR
+   -
+     name : Planning
+     identifier : 0x4436938c001aa2ca
+     internal_properties : CAAAAAgAAACkp8fmxfljyJYKx1BgeNijgiVxFt9y0dRvnkKUMxgA+PS60n5vADxe6RQxph4va4A2NoxCzMN8dXrYfhO7hFuQ1tgaZJ4=
+     physical_name : .\Planning.wwh
+     type : 65538
+     report :
+      fr-FR : FR
+   -
+     name : Activites
+     identifier : 0x4436937c00186399
+     internal_properties : CAAAAAgAAABEBydGJVkDKHaqZ7CAGHgD4kURNn8Skis4oUHDpnUhUU2q3WihNPio/6q7PujXi6DWVqyibGMclVr4HrMbJDvwtjj6BP4=
+     physical_name : .\Activites.wwh
+     type : 65538
+     report :
+      fr-FR : FR
+   -
+     name : EnvoiEmail
+     identifier : 0x44748dbb05fad251
+     internal_properties : CAAAAAgAAAA2HB4CoZ6WmaZGjSOQsE2O7I+r80SIeoqEOlN69CD0FDjmSwfiG0Ad/zmjHeUb59kjIw==
+     physical_name : .\EnvoiEmail.wdg
+     type : 7
+   -
+     name : PAGE_Admin_Formulaire
+     identifier : 0x447490260abe4233
+     internal_properties : CAAAAAgAAAAjEWRgQDTPI+lng2WZAhK9Bd7XpOIl8vp18Po2tt3KbUfWjQqW4odp0rJoYaAB3dRG6yzPYj0mjsVony513KdUwloWjqgbxEYjBGiuRvnK0zBxuw==
+     physical_name : .\PAGE_Admin_Formulaire.wwh
+     type : 65538
+     report :
+      fr-FR : FR\Adminstration
+   -
+     name : Tennis
+     identifier : 0x4474ad9105b62fee
+     internal_properties : CAAAAAgAAAB+Cb1oR3vlShCMSaayDkIFNI/vgOm8Ve4N1NziGwwd9dr104prAz5KE2671ERJGTJIwAbYOl0Si0zqAJE5BtkSWFqU+vQ=
+     physical_name : .\Tennis.wwh
+     type : 65538
+     report :
+      fr-FR : FR
+   -
+     name : GestionErreurs
+     identifier : 0x447493a30025e41d
+     internal_properties : CAAAAAgAAACb90NHZCGJkl1Bju6C0gKBw2AOlil7pEC3O3atScdP8RM9whIA+KsY+iSeGppWIpZ+hg==
+     physical_name : .\GestionErreurs.wdg
+     type : 7
+   -
+     name : Spa
+     identifier : 0x4475a380004e7752
+     internal_properties : CAAAAAgAAAD6haHEk+dxprxYPapmwob56FM7dD1QWHkV+JqsuqgM+DZvQOkgSQed4ZxJznrlxV4UFNKMdhnWz4DedGXVmk2GLLZ4hng=
+     physical_name : .\Spa.wwh
+     type : 65538
+     report :
+      fr-FR : FR
+   -
+     name : PAGE_Admin_Planning
+     identifier : 0x4475b8c3005b8519
+     internal_properties : CAAAAAgAAACK4NX3P8VYVHj0FIoOl0/gIOX0r/0uEyE/fD9Phs2S2z+IAe/Gqv5QygnVsPd4tDXx2sH4y4617xqTRDU85ZxP338z4VuoV9u0lfndtWpbYqHiJA==
+     physical_name : .\PAGE_Admin_PLanning.wwh
+     type : 65538
+     report :
+      fr-FR : FR\Adminstration
+   -
+     name : PAGEMOD_Admin
+     identifier : 0x4475b84000388825
+     internal_properties : CAAAAAgAAADPSyd7yPW97vne2TEULy65y1jGjjEL4p+vRWqpLcNTTbd5jgojJbvdloB6Rs4C/vLaWg==
+     physical_name : .\PAGEMOD_Admin.wwt
+     type : 65541
+   -
+     name : PAGE_Admin_Administrateur
+     identifier : 0x448038c8016500fb
+     internal_properties : CAAAAAgAAAAiaF0Pp10gzIDcLDLWz5c4iF1M9xX2ZSsanJBW7PPgqQEWGYBJjNFFdmeniEf82N8DLOOGuZhzvUR1qCUkDfQnN9ebCSPgj5N8rYFVLeLj6ilqvA==
+     physical_name : .\PAGE_Admin_Administrateur.wwh
+     type : 65538
+     report :
+      fr-FR : FR\Adminstration
+   -
+     name : ConfigSite
+     identifier : 0x4480370c01163812
+     internal_properties : CAAAAAgAAAAT70tfbNlRCtXFIhdjM2L6lcKYyAtd9ZO3s9QHQ925d4GDrRsIMZuMcqwW4qJeGo52/g==
+     physical_name : .\ConfigSite.wdg
+     type : 7
+   -
+     name : PAGE_Admin_Connexion
+     identifier : 0x44802fbd00ecadfb
+     internal_properties : CAAAAAgAAABpQ7ZSWj4B7aM9TdPrPOxPm0hRJmSnDPllOAq/kTidnNTthuqUakKNNrRWf36/n6K8bYxNYDFSmtn0I7TzXiXWROSofL4NsrRdzqJ0DAPAxQJDhQ==
+     physical_name : .\PAGE_Admin_Connexion.wwh
+     type : 65538
+     report :
+      fr-FR : FR\Adminstration
+   -
+     name : Fitness
+     identifier : 0x4486dd3201b87f30
+     internal_properties : CAAAAAgAAAAxDWm9ijd/sL9h1pctb2NyP0L+lis1EZajvNfEMu4shLBc8g2UrdUk2EK8BIxEPKwUHA==
+     physical_name : .\Fitness.wwh
+     type : 65538
+   -
+     name : Esthetique
+     identifier : 0x448700b6026f3a66
+     internal_properties : CAAAAAgAAAA9GRUJtuPL1OOWdylsDL6gTygKKqmzFB2rknxft2mtE/nngcmnE+MhzHZgWNgI8OAoKA==
+     physical_name : .\Esthetique.wwh
+     type : 65538
+   -
+     name : GestionPlanning
+     identifier : 0x44cba7b10364236f
+     internal_properties : CAAAAAgAAABMyqTwT3Q8b3hTX204lK6YkKf/F6iyG2G7HoES9irqxk7wX8SvXNWORf/5x0+BeW9Z2Q==
+     physical_name : .\GestionPlanning.wdg
+     type : 7
+   -
+     name : PAGEMOD_Activite
+     identifier : 0x4183be590047d631
+     internal_properties : CAAAAAgAAAAWfH6iAX42OZ9/HM+fsdEO8L0/595wl4uvSa4te7XfwQfranzaZqMD4FlDvUW7R7kDAw==
+     physical_name : .\PAGEMOD_Activite.wwt
+     type : 65541
+  other_elements : []
+  analysis : .\WW_PlanningActivites_Club.ana\WW_PlanningActivites_Club.wda
+  net_assemblies : []
+  uwp_api : []
+  external_components : []
+  internal_components : []
+ common_generation_directory : true
+ wb_skin : 200 Kowii
+ wb_color_palette : Albaa
+ languages :
+  - fr-FR
+ wd_style_sheet : .\ValySculpture.sty
+ site_map :
+  roots : []
+  orphans :
+   -
+     name : Accueil
+     parameters : []
+     title :
+      fr-FR : Accueil
+     description :
+      fr-FR : Accueil
+   -
+     name : Activites
+     parameters : []
+     title :
+      fr-FR : Activités
+     description :
+      fr-FR : Activités
+   -
+     name : Contact
+     parameters : []
+     title :
+      fr-FR : Contact
+     description :
+      fr-FR : Contact
+   -
+     name : Esthetique
+     parameters : []
+     title :
+      fr-FR : Esthétique au TAMESCLUB - Montpellier
+     description :
+      fr-FR : Esthétique au TAMESCLUB - Montpellier
+   -
+     name : Fitness
+     parameters : []
+     title :
+      fr-FR : Fitness au TAMESCLUB - Montpellier
+     description :
+      fr-FR : Fitness au TAMESCLUB - Montpellier
+   -
+     name : Formulaire
+     parameters : []
+     title :
+      fr-FR : FOrmulaire
+     description :
+      fr-FR : FOrmulaire
+   -
+     name : PAGE_Admin_Administrateur
+     parameters : []
+     title :
+      fr-FR : Gestion du compte administrateur
+     description :
+      fr-FR : Gestion du compte administrateur
+   -
+     name : PAGE_Admin_Connexion
+     parameters : []
+     title :
+      fr-FR : Connexion
+     description :
+      fr-FR : Connexion
+   -
+     name : PAGE_Admin_Formulaire
+     parameters : []
+     title : {}
+     description : {}
+   -
+     name : PAGE_Admin_Planning
+     parameters : []
+     title : {}
+     description : {}
+   -
+     name : Planning
+     parameters : []
+     title :
+      fr-FR : Planning
+     description :
+      fr-FR : Planning
+   -
+     name : Spa
+     parameters : []
+     title :
+      fr-FR : Spa
+     description :
+      fr-FR : Spa
+   -
+     name : Tennis
+     parameters : []
+     title :
+      fr-FR : Tennis
+     description :
+      fr-FR : Tennis
+ url_rewriting :
+  internal_properties : CAAAAAgAAADkPzcUdUUS7wCiun+MCjqYH70RJdzkSv/nRvXZ3ENdikMa6bcHtsAH
+ code_elements :
+  internal_properties : CAAAAAgAAAAdQphZAr2A4LGL9q+X57BJ0NOTqcYPPhgtSq8WHrBnna2ErFUJCKavQpXMc6ZJKgP2L1PZ0P3g0YmS3Q0UgpGqnyzlXdrx
+  type_code : 0
+  p_codes :
+   -
+     code : |1+
+      
+      tabDatesSemaine est un tableau de Date
+      
+      RemplirTabDatesSemaine()
+     type : 196608
+   -
+     type : 196621
+   -
+     type : 196627
+     enabled : false
+  orphans :
+   -
+     name : Site
+     identifier : 0x44356b8f0003d265
+     code_elements :
+      type_code : 159
+      p_codes : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : ValySculpture
+rad :
+ internal_properties : CAAAAAgAAABhIL0UXeZmxDJxY3Xy0Q==
+project_explorer :
+ explorer_type : project
+ children :
+  -
+    explorer_type : pages
+    children :
+     -
+       name : Adminstration
+       explorer_type : custom_folder
+       children :
+        -
+          name : PAGE_Admin_Formulaire
+          explorer_type : element
+          type : 65538
+        -
+          name : PAGE_Admin_Planning
+          explorer_type : element
+          type : 65538
+        -
+          name : PAGE_Admin_Connexion
+          explorer_type : element
+          type : 65538
+        -
+          name : PAGE_Admin_Administrateur
+          explorer_type : element
+          type : 65538
+resources :
+ string_res :
+  identifier : 0x0
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : CAAAAAgAAAAd98VSJfHHqE3P0QHwrwdhn7ig8dWBR6valpUTgnAMTVXiDg==

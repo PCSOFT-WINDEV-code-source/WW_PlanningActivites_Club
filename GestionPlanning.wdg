@@ -1,0 +1,85 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : GestionPlanning
+ major_version : 28
+ minor_version : 0
+ type : 7
+ description : ""
+ subtype : 0
+procedure_set :
+ identifier : 0x14cba79506d6b542
+ internal_properties : CAAAAAgAAABGLu41kG7fjQV3iS4F72qmnKaNh5694reolNKIW0iw
+ code_elements :
+  type_code : 31
+  p_codes : []
+  procedures :
+   -
+     name : RemplirTabDatesSemaine
+     procedure_id : 1498475568127523768
+     type_code : 15
+     code : |1+
+      // Résumé : Remplit un tableau avec les dates des jours de la semaine
+      // Syntaxe :
+      //RemplirTabDatesSemaine ()
+      //
+      // Paramètres :
+      //	Aucun
+      // Valeur de retour :
+      // 	Aucune
+      PROCEDURE RemplirTabDatesSemaine()
+      
+      
+      //Lundi 
+      dAujourdhui est une date 
+      nEntierAujourdhui est un entier = DateVersEntier(dAujourdhui)
+      nNumJourDansLaSemaine est un entier = dateversjour(dAujourdhui) 
+      
+      
+      nEntierLundi est un entier = nEntierAujourdhui - nNumJourDansLaSemaine + 1
+      dLundi est une date = entierversdate(nEntierLundi) 
+      TableauAjoute(tabDatesSemaine, dLundi)
+      
+      
+      //Mardi 
+      dMardi est une date  = dLundi
+      dMardi++
+      TableauAjoute(tabDatesSemaine, dMardi)
+      
+      //Mercredi 
+      dMercredi est une date = dMardi
+      dMercredi++
+      TableauAjoute(tabDatesSemaine, dMercredi)
+      
+      
+      //Jeudi 
+      dJeudi est une date = dMercredi
+      dJeudi++
+      TableauAjoute(tabDatesSemaine, dJeudi)
+      
+      //Vendredi 
+      dVendredi est une date = dJeudi
+      dVendredi++
+      TableauAjoute(tabDatesSemaine, dVendredi)
+      
+      //Samedi 
+      dSamedi est une date = dVendredi
+      dSamedi++
+      TableauAjoute(tabDatesSemaine, dSamedi)
+      
+      //Dimanche 
+      dDimanche est une date = dSamedi
+      dDimanche++
+      TableauAjoute(tabDatesSemaine, dDimanche)
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : COL_SansNom1
+resources :
+ string_res :
+  identifier : 0x10f6dba505b52fbf
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : CAAAAAgAAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ
